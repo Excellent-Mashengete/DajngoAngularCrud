@@ -1,34 +1,23 @@
 <app-header></app-header>
 <div class="container mx-auto px-4">
     <div class="overflow-x-auto">
-        <table class="table table-zebra w-full">
+        <table class="table table-zebra w-full" >
             <thead>
                 <tr>
-                    <th></th>
-                    <th>Name</th>
-                    <th>Job</th>
-                    <th>Favorite Color</th>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th><a type="button" routerLink='/create' class="put btn btn-success">Create</a></th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th>1</th>
-                    <td>Cy Ganderton</td>
-                    <td>Quality Control Specialist</td>
-                    <td>Blue</td>
+                <tr *ngFor="let items of authors">
+                    <td>{{items.authorid}}</td>
+                    <td>{{items.fname}}</td>
+                    <td>{{items.lname}}</td>
+                    <td> <td>
                 </tr>
-                <tr>
-                    <th>2</th>
-                    <td>Hart Hagerty</td>
-                    <td>Desktop Support Technician</td>
-                    <td>Purple</td>
-                </tr>
-                <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                </tr>
+               
             </tbody>
         </table>
     </div>
