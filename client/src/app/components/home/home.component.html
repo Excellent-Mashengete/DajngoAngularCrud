@@ -1,24 +1,74 @@
 <app-header></app-header>
-<div class="container mx-auto px-4">
-    <div class="overflow-x-auto">
-        <table class="table table-zebra w-full" >
-            <thead>
+
+<p-toast></p-toast>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<div class="container">
+    <div class="card">
+        <p-toolbar>
+            <ng-template pTemplate="left">
+                <button pButton pRipple icon="pi pi-plus" class="p-button-success p-mr-5">New</button>
+            </ng-template>
+        </p-toolbar>
+
+        <p-table [value]="books" [rows]="10"  [paginator]="true" responsiveLayout="scroll" dataKey="id" >
+            <ng-template pTemplate="caption">
+                <div class="row  ">
+                    <div>
+                        <h5 class="p-m-0">Manage Books</h5>
+                    </div>
+
+                    <div>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input class="form-control" pInputText type="text" placeholder="Search..." />
+                        </span>
+                    </div>
+                </div>
+            </ng-template>[value]="books"
+            <ng-template pTemplate="header">
                 <tr>
-                    <th>ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th><a type="button" routerLink='/create' class="put btn btn-success">Create</a></th>
+                    <th pSortableColumn="isbn">ISBN <p-sortIcon field="isbn"></p-sortIcon></th>
+                    <th pSortableColumn="title">title <p-sortIcon field="title"></p-sortIcon></th>
+                    <th pSortableColumn="pubdate">Publication <p-sortIcon field="pubdate"></p-sortIcon></th>
+                    <th >Publisher ID </th>
+                    <th >Author ID </th>
+                    <th pSortableColumn="cost">Price <p-sortIcon field="cost"></p-sortIcon></th>
+                    <th >Create Date</th>
+                    <th pSortableColumn="updated_at">Update Date <p-sortIcon field="updated_at"></p-sortIcon></th>
+                    <th >Action</th>
                 </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let items of authors">
-                    <td>{{items.authorid}}</td>
-                    <td>{{items.fname}}</td>
-                    <td>{{items.lname}}</td>
-                    <td> <td>
+            </ng-template>
+            <ng-template pTemplate="body" let-books (click)="RowSelected(books);">
+                <tr>
+                    <td>{{books.isbn | filter:filterTerm}}</td>
+                    <td>{{books.title | filter:filterTerm}}</td>
+                    <td>{{books.pubdate | date: 'dd MMM YYYY'}}</td>
+                    <td>{{books.pubid}}</td>
+                    <td>{{books.authorid}}</td>
+                    <td>{{books.cost}}</td>
+                    <td>{{books.created_at | date: 'dd MMM YYYY'}}</td>
+                    <td>{{books.updated_at | date: 'dd MMM YYYY'}}</td>
+                    <td >
+                        <button pButton pRipple icon="pi pi-eye" (click)="loading = !loading" routerLink="/bookid/{{books.id}}" class="p-button-rounded p-button-success " ></button>
+                        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success " ></button>
+                        <button pButton pRipple icon="pi pi-trash" (click)="deleteProduct(books)" class="p-button-rounded p-button-warning" ></button>
+                    </td>
                 </tr>
-               
-            </tbody>
-        </table>
+            </ng-template>
+            <ng-template pTemplate="summary">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                    In total there are {{books ? books.length : 0 }} books.
+                </div>
+            </ng-template>
+        </p-table>
     </div>
+
+    <ngx-loading
+    [show]="loading"
+    [config]="{
+      animationType: ngxLoadingAnimationTypes.circleSwish,
+      primaryColour: '#ffffff', secondaryColour: '#ffffff',
+      backdropBorderRadius: '3px'
+    }">
+    </ngx-loading>
 </div>

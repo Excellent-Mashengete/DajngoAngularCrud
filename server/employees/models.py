@@ -7,7 +7,6 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
-
 class BkAuthor(models.Model):
     authorid = models.AutoField(primary_key=True)
     fname = models.CharField(max_length=255)
@@ -28,6 +27,7 @@ class BkBook(models.Model):
     cost = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
     created_at = models.DateTimeField()
     updated_at = models.DateTimeField()
+    image = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -42,3 +42,10 @@ class BkPublisher(models.Model):
     class Meta:
         managed = False
         db_table = 'bk_publisher'
+
+
+
+
+
+
+

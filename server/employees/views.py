@@ -89,7 +89,13 @@ def deleteAuth(request,pk):
     return Response(status=status.HTTP_204_NO_CONTENT)
     
 @api_view(['GET'])
-def getAuthor(request):
-    book = BkAuthor.objects.all()
-    serializer = AuthorSerializer(book, many = True)
+def getAuthor(request, pk):
+    auth = BkAuthor.objects.get(authorid=pk)
+    serializer = AuthorSerializer(auth, many = False)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def getPub(request, pk):
+    pub = BkPublisher.objects.get(pubid=pk)
+    serializer = PublisherSerializer(pub, many = False)
     return Response(serializer.data, status=status.HTTP_200_OK)

@@ -1,0 +1,19 @@
+
+<div class="container" style="margin-top:5%;">
+    <div class="card lg:card-side bg-base-100 shadow-xl"  >
+        <figure><img src={{bookInfo.image}} alt="Album"></figure>
+        <div class="card-body">
+            <h2 class="card-title">{{bookInfo.title}}</h2>
+            <p>{{auth.fname}}  {{auth.lname}}</p>
+        </div>
+    </div>
+    
+    <ngx-loading
+    [show]="loading"
+    [config]="{
+      animationType: ngxLoadingAnimationTypes.circleSwish,
+      primaryColour: '#ffffff', secondaryColour: '#ffffff',
+      backdropBorderRadius: '3px'
+    }">
+    </ngx-loading>
+</div>

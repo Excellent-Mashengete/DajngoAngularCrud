@@ -21,5 +21,6 @@ urlpatterns=[
     path('api/deleteauth/<int:pk>',views.deleteAuth),
     
     #get user
-    path('api/getauth',views.getAuthor),
+    path('api/getauth/<int:pk>',views.getAuthor),
+    path('api/getpub/<int:pk>',views.getPub)
 ]
